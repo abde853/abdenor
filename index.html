@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0f1d">
+    <title>المصحف الإلكتروني</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Scheherazade+New:wght@400;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== الصفحة الرئيسية: فهرس السور ========== -->
+    <div id="home-view" class="view">
+        <header class="topbar">
+            <h1 class="app-title">القرآن الكريم</h1>
+            <button id="open-settings-home" class="icon-btn" aria-label="الإعدادات">⚙</button>
+        </header>
+
+        <main class="home-content">
+            <div class="search-wrap">
+                <input id="search" type="search" placeholder="ابحث باسم السورة أو رقمها..." autocomplete="off">
+            </div>
+            <div id="surahs-container" class="surahs-grid">
+                <p class="status-text">جاري تحميل السور...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== صفحة السورة (تفتح وحدها) ========== -->
+    <div id="surah-view" class="view" hidden>
+        <header class="topbar surah-bar">
+            <button id="back-btn" class="back-btn">→ رجوع</button>
+            <div class="surah-heading">
+                <h2 id="surah-title">—</h2>
+                <span id="surah-meta"></span>
+            </div>
+            <button id="open-settings-surah" class="icon-btn" aria-label="الإعدادات">⚙</button>
+        </header>
+
+        <nav class="tabs">
+            <button id="tab-read" class="tab active">📖 قراءة</button>
+            <button id="tab-listen" class="tab">🎧 استماع</button>
+        </nav>
+
+        <!-- وضع القراءة -->
+        <section id="read-panel" class="panel">
+            <article id="quran-text" class="quran-text"></article>
+            <div class="end-nav">
+                <button id="prev-surah" class="nav-btn">السورة السابقة</button>
+                <button id="next-surah" class="nav-btn">السورة التالية</button>
+            </div>
+        </section>
+
+        <!-- أزرار الزوم العائمة على الجنب -->
+        <div id="zoom-float" class="zoom-float">
+            <button id="zoom-in" class="zoom-btn" aria-label="تكبير">A+</button>
+            <button id="zoom-out" class="zoom-btn" aria-label="تصغير">A−</button>
+        </div>
+
+        <!-- وضع الاستماع -->
+        <section id="listen-panel" class="panel" hidden>
+            <div class="listen-card">
+                <div class="listen-icon">🎧</div>
+                <h3 id="listen-title">—</h3>
+
+                <label class="field">
+                    <span>القارئ</span>
+                    <select id="reciter">
+                        <option value="ar.alafasy">مشاري العفاسي</option>
+                        <option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد</option>
+                        <option value="ar.husary">محمود خليل الحصري</option>
+                        <option value="ar.minshawi">محمد صديق المنشاوي</option>
+                        <option value="ar.hudhaify">علي الحذيفي</option>
+                    </select>
+                </label>
+
+                <audio id="quran-audio" controls preload="none"></audio>
+
+                <div class="speed-row">
+                    <span>السرعة</span>
+                    <button class="speed-btn" data-speed="0.75">٠٫٧٥×</button>
+                    <button class="speed-btn active" data-speed="1">١×</button>
+                    <button class="speed-btn" data-speed="1.25">١٫٢٥×</button>
+                    <button class="speed-btn" data-speed="1.5">١٫٥×</button>
+                </div>
+                <p id="audio-msg" class="status-text"></p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========== لوحة الإعدادات والألوان ========== -->
+    <div id="settings-backdrop" class="backdrop" hidden></div>
+    <aside id="settings" class="sheet" hidden>
+        <div class="sheet-head">
+            <h3>المظهر والألوان</h3>
+            <button id="close-settings" class="icon-btn" aria-label="إغلاق">✕</button>
+        </div>
+
+        <p class="sheet-label">الأنماط الجاهزة</p>
+        <div id="theme-swatches" class="swatches"></div>
+
+        <p class="sheet-label">ألوان مخصصة</p>
+        <div class="color-grid">
+            <label class="color-field"><span>الخلفية</span><input type="color" id="c-bg"></label>
+            <label class="color-field"><span>لون الكتابة</span><input type="color" id="c-text"></label>
+            <label class="color-field"><span>لون التمييز</span><input type="color" id="c-accent"></label>
+        </div>
+
+        <p class="sheet-label">نوع الخط</p>
+        <select id="font-select" class="full-select">
+            <option value="Amiri">أميري</option>
+            <option value="Noto Naskh Arabic">نسخ</option>
+            <option value="Scheherazade New">شهرزاد</option>
+        </select>
+
+        <button id="reset-settings" class="reset-btn">إعادة الضبط الافتراضي</button>
+    </aside>
+
+    <script src="app.js"></script>
+</body>
+</html>
